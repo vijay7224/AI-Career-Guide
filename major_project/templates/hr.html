@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HR Interview Questions & Answers - JobHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --gradient: linear-gradient(135deg, #6366f1, #ec4899);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--gradient);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            margin-bottom: 50px;
+        }
+
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 12px;
+        }
+
+        .header p {
+            font-size: 1.25rem;
+            opacity: 0.95;
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto 50px;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 16px 20px 16px 55px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .search-box i {
+            position: absolute;
+            left: 22px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+            font-size: 1.3rem;
+        }
+
+        .qa-container {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+
+        .qa-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .qa-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .question {
+            padding: 22px 28px;
+            background: #f8fafc;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 1.12rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .answer {
+            padding: 0 28px;
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.4s ease;
+            color: #374151;
+            line-height: 1.8;
+        }
+
+        .qa-card.active .answer {
+            padding: 28px;
+            max-height: 700px;
+        }
+
+        .qa-card.active .question {
+            background: #f0f0ff;
+        }
+
+        .qa-card .question i {
+            transition: 0.3s;
+        }
+
+        .qa-card.active .question i {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h1>HR Interview Questions & Answers</h1>
+        <p>Prepare confidently with detailed answers for fresher candidates</p>
+    </div>
+
+    <div class="search-box">
+        <i class="fas fa-search"></i>
+        <input type="text" id="searchInput" placeholder="Search questions... (e.g. strength, weakness, company)">
+    </div>
+
+    <div class="qa-container" id="qaContainer">
+
+        <!-- Question 1 -->
+        <div class="qa-card">
+            <div class="question">
+                <span>1. Tell me about yourself.</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="answer">
+                I am a final-year B.Tech student specializing in Artificial Intelligence and Machine Learning. I have developed strong skills in Python, SQL, Machine Learning, and Full Stack Web Development. I have worked on several real-world projects and internships that helped me gain practical experience. I am passionate about solving problems and continuously learning new technologies. I am looking for an opportunity where I can contribute my skills while growing professionally.
+            </div>
+        </div>
+
+        <!-- Question 2 -->
+        <div class="qa-card">
+            <div class="question">
+                <span>2. Why should we hire you?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="answer">
+                You should hire me because I am a quick learner, hardworking, and highly motivated. I bring a strong foundation in both technical and soft skills. I am adaptable, a good team player, and always eager to take on new challenges. I am confident that I can contribute positively to your team from day one while growing with the organization.
+            </div>
+        </div>
+
+        <!-- Question 3 -->
+        <div class="qa-card">
+            <div class="question">
+                <span>3. What are your strengths?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="answer">
+                My key strengths are problem-solving, quick learning ability, teamwork, and strong time management. I am also very adaptable and stay calm under pressure. I believe in continuous improvement and always try to deliver quality work.
+            </div>
+        </div>
+
+        <!-- Question 4 -->
+        <div class="qa-card">
+            <div class="question">
+                <span>4. What are your weaknesses?</span>
+                <i class="fas fa-chevron-down"></i>
+            </div>
+            <div class="answer">
+                Earlier I used to hesitate while speaking in public. However, I have been working on this by participating in presentations, group discussions, and college events. I have improved significantly and continue to work on becoming more confident.
+            </div>
+        </div>
+
+        <!-- Question 5 to 25 (All added with detailed answers) -->
+        <!-- I have included all 25 with good quality answers below -->
+
+        <div class="qa-card">
+            <div class="question"><span>5. Why do you want to join our company?</span><i class="fas fa-chevron-down"></i></div>
+            <div class="answer">I am impressed by your company's reputation for innovation, employee growth, and excellent work culture. I believe this is the perfect place where I can apply my skills and grow as a professional.</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question"><span>6. Where do you see yourself in 5 years?</span><i class="fas fa-chevron-down"></i></div>
+            <div class="answer">In five years, I see myself as a skilled and responsible professional in a reputed organization, taking on more challenging roles and contributing significantly to company goals.</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question"><span>7. What motivates you?</span><i class="fas fa-chevron-down"></i></div>
+            <div class="answer">Learning new technologies, solving complex problems, achieving goals, and receiving recognition for my work motivate me the most.</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question"><span>8. How do you handle pressure?</span><i class="fas fa-chevron-down"></i></div>
+            <div class="answer">I stay calm, prioritize tasks, break them into smaller parts, and focus on solutions. I also take short breaks to maintain clarity of mind.</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question"><span>9. Are you willing to relocate?</span><i class="fas fa-chevron-down"></i></div>
+            <div class="answer">Yes, I am fully open to relocation for the right opportunity and career growth.</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question"><span>10. What is your biggest achievement?</span><i class="fas fa-chevron-down"></i></div>
+            <div class="answer">Successfully completing my major project on Machine Learning with excellent feedback from faculty and winning 2nd prize in a national-level hackathon.</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question"><span>11. What is your biggest failure?</span><i class="fas fa-chevron-down"></i></div>
+            <div class="answer">One of my early projects failed due to poor planning. I learned the importance of proper requirement gathering and teamwork from that experience.</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question"><span>12. Describe yourself in three words.</span><i class="fas fa-chevron-down"></i></div>
+            <div class="answer">Hardworking, Adaptable, and Curious.</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question"><span>13. What makes you different from other candidates?</span><i class="fas fa-chevron-down"></i></div>
+            <div class="answer">My strong willingness to learn, positive attitude, and ability to quickly adapt to new technologies set me apart.</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question"><span>14. How do you prioritize your work?</span><i class="fas fa-chevron-down"></i></div>
+            <div class="answer">I prioritize tasks based on urgency, importance, and deadlines. I use tools like to-do lists and focus on completing high-impact tasks first.</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question"><span>15. Tell me about a challenge you faced.</span><i class="fas fa-chevron-down"></i></div>
+            <div class="answer">During a group project, we faced major integration issues. I took the initiative to debug and coordinated with the team. We successfully completed the project on time.</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question"><span>16. What do you know about our company?</span><i class="fas fa-chevron-down"></i></div>
+            <div class="answer">Your company is known for innovation, excellent work culture, and using cutting-edge technologies. It has a strong market presence and focuses on employee development.</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question"><span>17. How do you handle criticism?</span><i class="fas fa-chevron-down"></i></div>
+            <div class="answer">I take criticism positively and use it as an opportunity to improve myself. I always try to learn from feedback.</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question"><span>18. Are you a team player?</span><i class="fas fa-chevron-down"></i></div>
+            <div class="answer">Yes. I strongly believe in teamwork and enjoy collaborating with others to achieve common goals.</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question"><span>19. How do you handle conflicts in a team?</span><i class="fas fa-chevron-down"></i></div>
+            <div class="answer">I listen to everyone's point of view calmly, try to understand the root cause, and work towards finding a mutually beneficial solution.</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question"><span>20. What are your salary expectations?</span><i class="fas fa-chevron-down"></i></div>
+            <div class="answer">As a fresher, I am more focused on learning and growth. I am open to the standard compensation package offered by the company.</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question"><span>21. How do you learn new technologies?</span><i class="fas fa-chevron-down"></i></div>
+            <div class="answer">I learn through online courses (Coursera, Udemy), official documentation, hands-on projects, and participating in coding challenges.</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question"><span>22. What is your ideal work environment?</span><i class="fas fa-chevron-down"></i></div>
+            <div class="answer">A collaborative, supportive, and growth-oriented environment where I can learn and contribute effectively.</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question"><span>23. How do you define success?</span><i class="fas fa-chevron-down"></i></div>
+            <div class="answer">Success for me is continuous learning, achieving goals, and making a positive impact through my work.</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question"><span>24. Can you work under minimal supervision?</span><i class="fas fa-chevron-down"></i></div>
+            <div class="answer">Yes. I am self-motivated and capable of managing my responsibilities independently.</div>
+        </div>
+
+        <div class="qa-card">
+            <div class="question"><span>25. Do you have any questions for us?</span><i class="fas fa-chevron-down"></i></div>
+            <div class="answer">
+                Yes. I would like to know:<br>
+                • What does success look like in this role?<br>
+                • What technologies will I be working with?<br>
+                • What are the growth opportunities for freshers?
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // Accordion
+    document.querySelectorAll('.qa-card').forEach(card => {
+        card.addEventListener('click', () => {
+            card.classList.toggle('active');
+        });
+    });
+
+    // Search Functionality
+    document.getElementById('searchInput').addEventListener('input', function () {
+        const term = this.value.toLowerCase();
+        document.querySelectorAll('.qa-card').forEach(card => {
+            const text = card.textContent.toLowerCase();
+            card.style.display = text.includes(term) ? 'block' : 'none';
+        });
+    });
+</script>
+
+</body>
+</html>

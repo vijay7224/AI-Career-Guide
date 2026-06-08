@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - JobHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --gradient: linear-gradient(135deg, #6366f1, #ec4899);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--gradient);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .register-container {
+            width: 100%;
+            max-width: 440px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+
+        .header {
+            background: var(--gradient);
+            color: white;
+            padding: 35px 30px;
+            text-align: center;
+        }
+
+        .header h2 {
+            font-size: 1.9rem;
+            font-weight: 700;
+        }
+
+        .header p {
+            opacity: 0.9;
+            margin-top: 6px;
+        }
+
+        .form-body {
+            padding: 40px 35px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 16px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #64748b;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px 14px 48px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+        }
+
+        .password-wrapper {
+            position: relative;
+        }
+
+        #passwordStrength {
+            height: 6px;
+            margin-top: 8px;
+            border-radius: 10px;
+            transition: all 0.4s;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #4338ca;
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            text-align: center;
+            margin-top: 25px;
+            font-size: 0.97rem;
+        }
+
+        .footer-links a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .error {
+            background: #fee2e2;
+            color: #ef4444;
+            padding: 12px 16px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="register-container">
+        <!-- Header -->
+        <div class="header">
+            <h2>Create Account</h2>
+            <p>Join thousands of job seekers on JobHub</p>
+        </div>
+
+        <!-- Form -->
+        <div class="form-body">
+            <div class="error" id="errorMessage"></div>
+
+            <form action="/register" method="POST" id="registerForm">
+                <div class="form-group">
+                    <label>Username</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-user"></i>
+                        <input type="text" id="username" name="username" 
+                               placeholder="Choose a username" required autocomplete="username">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Email Address</label>
+                    <div class="input-wrapper">
+                        <i class="fas fa-envelope"></i>
+                        <input type="email" id="email" name="email" 
+                               placeholder="you@example.com" required autocomplete="email">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Password</label>
+                    <div class="password-wrapper">
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock"></i>
+                            <input type="password" id="password" name="password" 
+                                   placeholder="Create a strong password" required autocomplete="new-password">
+                        </div>
+                        <div id="passwordStrength"></div>
+                    </div>
+                </div>
+
+                <button type="submit">
+                    <i class="fas fa-user-plus"></i> Create Account
+                </button>
+            </form>
+
+            <div class="footer-links">
+                <p>Already have an account? 
+                    <a href="{{ url_for('login') }}">Login here</a>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const form = document.getElementById('registerForm');
+        const passwordInput = document.getElementById('password');
+        const strengthBar = document.getElementById('passwordStrength');
+        const errorDiv = document.getElementById('errorMessage');
+
+        // Password Strength Indicator
+        passwordInput.addEventListener('input', function() {
+            const value = this.value;
+            let strength = 0;
+
+            if (value.length >= 6) strength += 25;
+            if (value.length >= 8) strength += 20;
+            if (/[A-Z]/.test(value)) strength += 20;
+            if (/[0-9]/.test(value)) strength += 15;
+            if (/[^A-Za-z0-9]/.test(value)) strength += 20;
+
+            strengthBar.style.width = strength + '%';
+
+            if (strength < 40) strengthBar.style.backgroundColor = '#ef4444';
+            else if (strength < 70) strengthBar.style.backgroundColor = '#f59e0b';
+            else strengthBar.style.backgroundColor = '#22c55e';
+        });
+
+        // Form Validation
+        form.addEventListener('submit', function(e) {
+            const username = document.getElementById('username').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = passwordInput.value.trim();
+
+            if (!username || !email || !password) {
+                errorDiv.textContent = "All fields are required";
+                errorDiv.style.display = "block";
+                e.preventDefault();
+                return;
+            }
+
+            if (password.length < 6) {
+                errorDiv.textContent = "Password must be at least 6 characters long";
+                errorDiv.style.display = "block";
+                e.preventDefault();
+            } else {
+                errorDiv.style.display = "none";
+            }
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Job - JobHub Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --gradient: linear-gradient(135deg, #6366f1, #ec4899);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--gradient);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+
+        .header {
+            background: var(--gradient);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h2 {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        .form-body {
+            padding: 40px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        input, textarea, select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            transition: all 0.3s;
+        }
+
+        input:focus, textarea:focus, select:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 16px;
+            background: #f59e0b;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn:hover {
+            background: #d97706;
+            transform: translateY(-3px);
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <h2><i class="fas fa-edit"></i> Update Job</h2>
+    </div>
+
+    <div class="form-body">
+        <a href="/admin/jobs" class="back-link">
+            <i class="fas fa-arrow-left"></i> Back to Manage Jobs
+        </a>
+
+        <form method="POST">
+
+            <div class="form-group">
+                <label>Job Title</label>
+                <input type="text" name="job_title" value="{{ job.job_title | default('') }}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Company Name</label>
+                <input type="text" name="company" value="{{ job.company | default('') }}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Location</label>
+                <input type="text" name="location" value="{{ job.location | default('') }}" required>
+            </div>
+
+            <div class="form-group">
+                <label>Salary</label>
+                <input type="text" name="salary" value="{{ job.salary | default('') }}">
+            </div>
+
+            <div class="form-group">
+                <label>Job Type</label>
+                <select name="job_type">
+                    <option value="Full-time" {% if job.job_type == 'Full-time' %}selected{% endif %}>Full-time</option>
+                    <option value="Internship" {% if job.job_type == 'Internship' %}selected{% endif %}>Internship</option>
+                    <option value="Part-time" {% if job.job_type == 'Part-time' %}selected{% endif %}>Part-time</option>
+                    <option value="Contract" {% if job.job_type == 'Contract' %}selected{% endif %}>Contract</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Skills Required</label>
+                <textarea name="skills_required" required>{{ job.skills_required | default('') }}</textarea>
+            </div>
+
+            
+
+            <button type="submit" class="btn">
+                <i class="fas fa-save"></i> Update Job
+            </button>
+
+        </form>
+    </div>
+
+</div>
+
+</body>
+</html>

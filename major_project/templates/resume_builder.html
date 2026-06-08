@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Builder - JobHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --gradient: linear-gradient(135deg, #6366f1, #ec4899);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--gradient);
+            min-height: 100vh;
+            padding: 30px 20px;
+        }
+
+        .container {
+            max-width: 1250px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+
+        .header {
+            background: var(--gradient);
+            color: white;
+            padding: 28px 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .form-section {
+            padding: 40px;
+            background: #f8fafc;
+            overflow-y: auto;
+            max-height: 88vh;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 13px 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+        }
+
+        input:focus, textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        textarea { resize: vertical; min-height: 110px; }
+
+        .btn {
+            padding: 14px 28px;
+            background: var(--primary);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            margin-top: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn:hover { 
+            background: #4338ca; 
+            transform: translateY(-3px); 
+        }
+
+        .btn-success { 
+            background: #22c55e; 
+        }
+        .btn-success:hover { 
+            background: #16a34a; 
+        }
+
+        .preview-section {
+            padding: 40px;
+            background: white;
+            border-left: 1px solid #e2e8f0;
+        }
+
+        .resume-preview {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 45px 40px;
+            min-height: 100%;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .resume-name {
+            font-size: 2.4rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 8px;
+        }
+
+        .contact-info {
+            text-align: center;
+            color: #475569;
+            margin-bottom: 30px;
+        }
+
+        .section h3 {
+            color: var(--primary);
+            border-bottom: 3px solid #e2e8f0;
+            padding-bottom: 8px;
+            margin: 25px 0 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1><i class="fas fa-file-alt"></i> AI Resume Builder</h1>
+    </div>
+
+    <div class="main-content">
+        <!-- Form Section -->
+        <div class="form-section">
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="name" placeholder="John Doe">
+            </div>
+            <div class="form-group">
+                <label>Email</label>
+                <input type="email" id="email" placeholder="john@example.com">
+            </div>
+            <div class="form-group">
+                <label>Phone</label>
+                <input type="text" id="phone" placeholder="+91 98765 43210">
+            </div>
+            <div class="form-group">
+                <label>Professional Summary</label>
+                <textarea id="summary" placeholder="A motivated final year student..."></textarea>
+            </div>
+            <div class="form-group">
+                <label>Skills</label>
+                <textarea id="skills" placeholder="React, Python, Java, AWS, Leadership"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Education</label>
+                <textarea id="education" placeholder="B.Tech in Computer Science - VIT Bhopal (2022-2026)"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Experience</label>
+                <textarea id="experience" placeholder="Software Intern @ ABC Corp (2025)\n• Built responsive web application"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Projects</label>
+                <textarea id="projects" placeholder="Project 1 - Description"></textarea>
+            </div>
+
+            <button class="btn" onclick="generateResume()">
+                <i class="fas fa-magic"></i> Generate Preview
+            </button>
+            <button class="btn btn-success" onclick="downloadTXT()">
+                <i class="fas fa-file-alt"></i> Download TXT File
+            </button>
+        </div>
+
+        <!-- Preview Section -->
+        <div class="preview-section">
+            <h2 style="margin-bottom:20px; color:#1f2937;">Live Preview</h2>
+            <div class="resume-preview" id="resumePreview">
+                <div style="text-align:center; color:#94a3b8; margin-top:100px;">
+                    <i class="fas fa-file-alt" style="font-size:4rem; opacity:0.3;"></i><br><br>
+                    Fill details & click Generate Preview
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function generateResume() {
+    const name = document.getElementById("name").value || "Your Name";
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
+    const summary = document.getElementById("summary").value;
+    const skills = document.getElementById("skills").value;
+    const education = document.getElementById("education").value;
+    const experience = document.getElementById("experience").value;
+    const projects = document.getElementById("projects").value;
+
+    let html = `
+        <div class="resume-name">${name}</div>
+        <div class="contact-info">${email} ${email && phone ? ' | ' : ''} ${phone}</div>
+    `;
+
+    if (summary) html += `<div class="section"><h3>Professional Summary</h3><p>${summary}</p></div>`;
+    if (skills) html += `<div class="section"><h3>Skills</h3><p>${skills}</p></div>`;
+    if (education) html += `<div class="section"><h3>Education</h3><p>${education}</p></div>`;
+    if (experience) html += `<div class="section"><h3>Experience</h3><p>${experience.replace(/\n/g, '<br>')}</p></div>`;
+    if (projects) html += `<div class="section"><h3>Projects</h3><p>${projects.replace(/\n/g, '<br>')}</p></div>`;
+
+    document.getElementById("resumePreview").innerHTML = html;
+}
+
+function downloadTXT() {
+    const preview = document.getElementById("resumePreview");
+    
+    if (preview.innerText.includes("Fill details")) {
+        alert("Please generate the resume preview first!");
+        return;
+    }
+
+    const name = document.getElementById("name").value || "Resume";
+    const textContent = preview.innerText;
+
+    const blob = new Blob([textContent], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = `${name.replace(/\s+/g, '_')}_Resume.txt`;
+    link.click();
+}
+</script>
+
+</body>
+</html>

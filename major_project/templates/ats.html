@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATS Resume Analyzer - JobHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --gradient: linear-gradient(135deg, #6366f1, #ec4899);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: var(--gradient);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            color: #fff;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 780px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #1f2937;
+            border-radius: 24px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+
+        .header {
+            background: var(--gradient);
+            color: white;
+            padding: 35px 40px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .header p {
+            opacity: 0.95;
+            font-size: 1.1rem;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .upload-area {
+            border: 3px dashed #6366f1;
+            border-radius: 16px;
+            padding: 50px 20px;
+            text-align: center;
+            transition: 0.3s;
+            cursor: pointer;
+            margin-bottom: 25px;
+        }
+
+        .upload-area:hover {
+            background: #f0f0ff;
+            border-color: #4f46e5;
+        }
+
+        .upload-area i {
+            font-size: 3.5rem;
+            color: #6366f1;
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin: 20px 0 10px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        textarea {
+            width: 100%;
+            min-height: 160px;
+            padding: 16px;
+            border: 2px solid #e2e8f0;
+            border-radius: 12px;
+            font-size: 1rem;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 16px;
+            font-size: 1.15rem;
+            font-weight: 600;
+            border: none;
+            border-radius: 12px;
+            background: var(--gradient);
+            color: white;
+            cursor: pointer;
+            transition: all 0.4s;
+        }
+
+        button:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 15px 30px rgba(79, 70, 229, 0.4);
+        }
+
+        /* Result Section */
+        .result {
+            margin-top: 35px;
+            padding: 30px;
+            background: #f8fafc;
+            border-radius: 16px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .score-container {
+            text-align: center;
+            margin-bottom: 25px;
+        }
+
+        .score {
+            font-size: 3.2rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #22c55e, #86efac);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .progress {
+            height: 22px;
+            background: #e2e8f0;
+            border-radius: 50px;
+            overflow: hidden;
+            margin: 20px 0;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #22c55e, #86efac);
+            transition: width 1.5s ease;
+        }
+
+        h3 {
+            color: #1f2937;
+            margin: 25px 0 12px;
+        }
+
+        .suggestions {
+            background: white;
+            padding: 18px;
+            border-radius: 12px;
+            border-left: 5px solid #eab308;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 35px;
+            color: #64748b;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>ATS Resume Analyzer</h1>
+        <p>Boost your chances of getting shortlisted</p>
+    </div>
+
+    <div class="content">
+        <form method="POST" enctype="multipart/form-data">
+            <label><i class="fas fa-file-pdf"></i> Upload Your Resume (PDF)</label>
+            <div class="upload-area" onclick="document.querySelector('input[type=file]').click()">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p><strong>Click to upload</strong> or drag and drop</p>
+                <small>Only PDF files supported • Max 5MB</small>
+            </div>
+            <input type="file" name="resume" accept=".pdf" required style="display:none;">
+
+            <label><i class="fas fa-clipboard-list"></i> Paste Job Description</label>
+            <textarea name="jd" placeholder="Paste the complete job description here..." required></textarea>
+
+            <button type="submit">
+                <i class="fas fa-magic"></i> Analyze Resume
+            </button>
+        </form>
+
+        {% if score is not none %}
+        <div class="result">
+            <div class="score-container">
+                <div class="score">{{ score }}%</div>
+                <p style="color: #22c55e; font-weight: 600;">ATS Compatibility Score</p>
+            </div>
+
+            <div class="progress">
+                <div class="progress-bar" style="width: {{ score }}%;"></div>
+            </div>
+
+            <h3>🔍 Missing Keywords</h3>
+            {% if missing and missing|length > 0 %}
+                <div class="suggestions">
+                    <ul>
+                        {% for word in missing %}
+                            <li><strong>{{ word }}</strong></li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% else %}
+                <p style="color: #22c55e; font-weight: 500;">✅ Excellent! Your resume matches well with the job description.</p>
+            {% endif %}
+        </div>
+        {% endif %}
+
+        <div class="footer">
+            Powered by JobHub AI • Helping you land your dream job
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

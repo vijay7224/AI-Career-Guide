@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - JobHub</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --gradient: linear-gradient(135deg, #6366f1, #ec4899);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: var(--gradient);
+            color: white;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .header h1 {
+            font-size: 1.9rem;
+            font-weight: 700;
+        }
+
+        .logout-btn {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 10px 22px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+
+        /* Stats Cards */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 28px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .stat-icon {
+            font-size: 2.8rem;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .stat-card h2 {
+            color: #64748b;
+            font-size: 1.1rem;
+            margin-bottom: 8px;
+        }
+
+        .stat-card h1 {
+            font-size: 2.4rem;
+            font-weight: 700;
+            color: #1f2937;
+        }
+
+        /* Popular Skills */
+        .skills-box {
+            background: white;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+        }
+
+        .skills-box h2 {
+            margin-bottom: 20px;
+            color: #1f2937;
+            font-size: 1.6rem;
+        }
+
+        .skills-list {
+            list-style: none;
+        }
+
+        .skills-list li {
+            padding: 14px 0;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.05rem;
+        }
+
+        .skills-list li:last-child {
+            border-bottom: none;
+        }
+
+        /* Menu */
+        .menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 20px;
+        }
+
+        .menu a {
+            background: white;
+            padding: 28px 24px;
+            border-radius: 16px;
+            text-decoration: none;
+            color: #1f2937;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .menu a:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .menu i {
+            font-size: 1.8rem;
+            color: var(--primary);
+        }
+
+        .menu h3 {
+            margin: 0;
+            font-size: 1.25rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1><i class="fas fa-user-shield"></i> Admin Dashboard</h1>
+        <a href="/logout" class="logout-btn">
+            <i class="fas fa-sign-out-alt"></i> Logout
+        </a>
+    </div>
+
+    <div class="container">
+
+        <!-- Stats Cards -->
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users"></i>
+                </div>
+                <h2>Total Students</h2>
+                <h1>{{ total_students }}</h1>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-briefcase"></i>
+                </div>
+                <h2>Total Jobs Posted</h2>
+                <h1>{{ total_jobs }}</h1>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h2>Active Applications</h2>
+                <h1>{{ total_applications }}</h1>
+            </div>
+        </div>
+
+        <!-- Popular Skills -->
+        <div class="skills-box">
+            <h2><i class="fas fa-star"></i> Most Popular Skills</h2>
+            <ul class="skills-list">
+                {% for skill, count in popular_skills %}
+                    <li>
+                        <span>{{ skill }}</span>
+                        <strong>{{ count }} Jobs Required</strong>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+
+        <!-- Quick Menu -->
+        <h2 style="margin-bottom:20px; color:#1f2937;">Quick Actions</h2>
+        <div class="menu">
+
+            <a href="/admin/students">
+                <i class="fas fa-user-graduate"></i>
+                <h3>Manage Students</h3>
+            </a>
+
+            <a href="/admin/jobs">
+                <i class="fas fa-list"></i>
+                <h3>Manage Jobs</h3>
+            </a>
+
+            <a href="/admin/add_job">
+                <i class="fas fa-plus-circle"></i>
+                <h3>Add New Job</h3>
+            </a>
+
+            <a href="/job">
+                <i class="fas fa-chart-bar"></i>
+                <h3>ALL JOBS</h3>
+            </a>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
